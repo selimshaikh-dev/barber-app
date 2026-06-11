@@ -19,16 +19,14 @@ namespace BarberApp.Domain.Entities
 
         public string? TransactionId { get; set; }
 
-        // Payment Gateway Information
-        public PaymentGateway? Gateway { get; set; }   // bKash, Nagad, SSLCommerz, Stripe
+        public PaymentGateway? Gateway { get; set; }   
 
-        public string? GatewayTransactionId { get; set; } // Gateway's transaction/reference id
+        public string? GatewayTransactionId { get; set; } 
 
         public DateTime? PaidAt { get; set; }
 
         public string? Remarks { get; set; }
 
-        // Navigation Properties
         public Booking Booking { get; set; }
 
         public User User { get; set; }

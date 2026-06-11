@@ -10,6 +10,6 @@ namespace BarberApp.Domain.Entities
 
         public string MediaUrl { get; set; }
 
-        public MediaType MediaType { get; set; }  // 👈 HERE YOU USE IT
+        public MediaType MediaType { get; set; }  
     }
 }
