@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace BarberApp.Domain.Enums
 {
     public enum UserRole
     {
+        Admin,
+        Barber,
+        Client
     }
 }

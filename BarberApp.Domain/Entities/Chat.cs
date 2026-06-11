@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BarberApp.Domain.Common;
 
 namespace BarberApp.Domain.Entities
 {
-    internal class Chat
+    public class Chat : BaseEntity
     {
+        public int BookingId { get; set; }
+
+        public Booking Booking { get; set; }
     }
 }

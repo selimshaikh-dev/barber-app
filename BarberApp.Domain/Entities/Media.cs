@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BarberApp.Domain.Common;
+using BarberApp.Domain.Enums;
 
 namespace BarberApp.Domain.Entities
 {
-    internal class Media
+    public class Media : BaseEntity
     {
+        public string EntityType { get; set; } // Shop / User / Service / Booking
+        public int EntityId { get; set; }
+
+        public string MediaUrl { get; set; }
+
+        public MediaType MediaType { get; set; }  // 👈 HERE YOU USE IT
     }
 }
