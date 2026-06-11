@@ -21,9 +21,4 @@
     <ProjectReference Include="..\BarberApp.Infrastructure\BarberApp.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Responses\" />
-    <Folder Include="Models\Requests\" />
-  </ItemGroup>
-
 </Project>

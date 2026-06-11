@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BarberApp.Infrastructure.Repositories
+namespace BarberApp.Application.Common
 {
-    internal class ShopRepository
+    internal class Result
     {
     }
 }

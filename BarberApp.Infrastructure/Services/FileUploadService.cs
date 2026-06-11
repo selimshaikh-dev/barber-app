@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BarberApp.Infrastructure.Repositories
+namespace BarberApp.Infrastructure.Services
 {
-    internal class UserRepository
+    internal class FileUploadService
     {
     }
 }

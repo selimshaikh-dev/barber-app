@@ -1,24 +1,15 @@
-using BarberApp.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
+using BarberApp.API.Extensions;
+using BarberApp.API.Extensions.BarberApp.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddProjectServices(builder.Configuration);
+
 builder.Services.AddControllers();
-
-// Register DbContext
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
-// OpenAPI / Swagger
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -26,6 +17,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
