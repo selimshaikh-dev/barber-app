@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BarberApp.Application.Interfaces.Services
+﻿namespace BarberApp.Application.Interfaces.Services
 {
-    internal interface IBookingService
+    public interface IBookingService
     {
+
     }
 }

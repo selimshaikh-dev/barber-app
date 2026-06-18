@@ -22,6 +22,44 @@ namespace BarberApp.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Area", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("ThanaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThanaId");
+
+                    b.ToTable("Areas", (string)null);
+                });
+
             modelBuilder.Entity("BarberApp.Domain.Entities.AvailabilitySlot", b =>
                 {
                     b.Property<int>("Id")
@@ -201,64 +239,6 @@ namespace BarberApp.Infrastructure.Migrations
                     b.HasIndex("BookingId");
 
                     b.ToTable("Chats", (string)null);
-                });
-
-            modelBuilder.Entity("BarberApp.Domain.Entities.Location", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Area")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasDefaultValue("Bangladesh");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("District")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<double?>("Latitude")
-                        .HasPrecision(9, 6)
-                        .HasColumnType("float(9)");
-
-                    b.Property<double?>("Longitude")
-                        .HasPrecision(9, 6)
-                        .HasColumnType("float(9)");
-
-                    b.Property<string>("Thana")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Area");
-
-                    b.HasIndex("District");
-
-                    b.HasIndex("Thana");
-
-                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("BarberApp.Domain.Entities.Media", b =>
@@ -603,6 +583,9 @@ namespace BarberApp.Infrastructure.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int>("AreaId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -618,8 +601,11 @@ namespace BarberApp.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("float");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -645,7 +631,7 @@ namespace BarberApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("AreaId");
 
                     b.HasIndex("OwnerId");
 
@@ -764,6 +750,78 @@ namespace BarberApp.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("District", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name");
+
+                    b.ToTable("Districts", (string)null);
+                });
+
+            modelBuilder.Entity("Thana", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("Thanas", (string)null);
+                });
+
+            modelBuilder.Entity("Area", b =>
+                {
+                    b.HasOne("Thana", "Thana")
+                        .WithMany("Areas")
+                        .HasForeignKey("ThanaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Thana");
                 });
 
             modelBuilder.Entity("BarberApp.Domain.Entities.AvailabilitySlot", b =>
@@ -936,9 +994,9 @@ namespace BarberApp.Infrastructure.Migrations
 
             modelBuilder.Entity("BarberApp.Domain.Entities.Shop", b =>
                 {
-                    b.HasOne("BarberApp.Domain.Entities.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
+                    b.HasOne("Area", "Area")
+                        .WithMany("Shops")
+                        .HasForeignKey("AreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -948,7 +1006,7 @@ namespace BarberApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Location");
+                    b.Navigation("Area");
 
                     b.Navigation("Owner");
                 });
@@ -970,6 +1028,32 @@ namespace BarberApp.Infrastructure.Migrations
                     b.Navigation("Shop");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Thana", b =>
+                {
+                    b.HasOne("District", "District")
+                        .WithMany("Thanas")
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("District");
+                });
+
+            modelBuilder.Entity("Area", b =>
+                {
+                    b.Navigation("Shops");
+                });
+
+            modelBuilder.Entity("District", b =>
+                {
+                    b.Navigation("Thanas");
+                });
+
+            modelBuilder.Entity("Thana", b =>
+                {
+                    b.Navigation("Areas");
                 });
 #pragma warning restore 612, 618
         }

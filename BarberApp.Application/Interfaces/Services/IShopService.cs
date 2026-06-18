@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BarberApp.Application.DTOs;
 
 namespace BarberApp.Application.Interfaces.Services
 {
-    internal interface IShopService
+    public interface IShopService
     {
+        Task<List<ShopDto>> GetShopsByAreaAsync(int areaId);
     }
 }

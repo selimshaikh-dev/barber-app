@@ -1,12 +1,50 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BarberApp.Application.DTOs.AuthDtos;
+using BarberApp.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BarberApp.API.Controllers
 {
-    public class AuthController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AuthController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IAuthService _authService;
+        private readonly ILogger<AuthController> _logger;
+
+        public AuthController(
+            IAuthService authService,
+            ILogger<AuthController> logger)
         {
-            return View();
+            _authService = authService;
+            _logger = logger;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(
+            [FromBody] RegisterRequestDto dto)
+        {
+            var result = await _authService.RegisterAsync(dto);
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(
+            [FromBody] LoginRequestDto dto)
+        {
+            var result = await _authService.LoginAsync(dto);
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult GetCurrentUser()
+        {
+            return Ok("Current User Information");
         }
     }
 }

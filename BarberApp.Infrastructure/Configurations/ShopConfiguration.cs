@@ -37,13 +37,13 @@ namespace BarberApp.Infrastructure.Configurations
                 .HasForeignKey(x => x.OwnerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.Location)
-                .WithMany()
-                .HasForeignKey(x => x.LocationId)
+            builder.HasOne(x => x.Area)
+                .WithMany(x => x.Shops)
+                .HasForeignKey(x => x.AreaId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasIndex(x => x.OwnerId);
-            builder.HasIndex(x => x.LocationId);
+            builder.HasIndex(x => x.AreaId);
         }
     }
 }

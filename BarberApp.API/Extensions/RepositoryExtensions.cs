@@ -1,5 +1,7 @@
-﻿using BarberApp.Application.Interfaces;
+﻿using BarberApp.Application.Interfaces.Repositories;
+using BarberApp.Application.Interfaces.UnitOfWork;
 using BarberApp.Infrastructure.Repositories;
+using BarberApp.Infrastructure.UnitOfWork;
 
 namespace BarberApp.API.Extensions
 {
@@ -7,12 +9,15 @@ namespace BarberApp.API.Extensions
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IShopRepository, ShopRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
 
-            // later you can add:
-            // services.AddScoped<IUserRepository, UserRepository>();
-            // services.AddScoped<IShopRepository, ShopRepository>();
-            // services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IDistrictRepository, DistrictRepository>();
+            services.AddScoped<IThanaRepository, ThanaRepository>();
+            services.AddScoped<IAreaRepository, AreaRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

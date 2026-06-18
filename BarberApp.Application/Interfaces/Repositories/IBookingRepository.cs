@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BarberApp.Domain.Entities;
 
 namespace BarberApp.Application.Interfaces.Repositories
 {
-    internal interface IBookingRepository
+    public interface IBookingRepository : IGenericRepository<Booking>
     {
+
     }
 }

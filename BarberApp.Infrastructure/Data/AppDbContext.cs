@@ -15,7 +15,9 @@ namespace BarberApp.Infrastructure.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ShopStaff> ShopStaffs { get; set; }
-        public DbSet<Location> Locations { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<Thana> Thanas { get; set; }
+        public DbSet<Area> Areas { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Notification> Notifications { get; set; }

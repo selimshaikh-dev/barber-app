@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BarberApp.Domain.Entities;
 
 namespace BarberApp.Application.Interfaces.Repositories
 {
-    internal interface IUserRepository
+    public interface IUserRepository : IGenericRepository<User>
     {
+        Task<bool> ExistsByMobileAsync(string mobileNumber);
+
+        Task<User?> GetByMobileAsync(string mobileNumber);
     }
 }

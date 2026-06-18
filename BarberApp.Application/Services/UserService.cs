@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BarberApp.Application.Interfaces.Services;
 
 namespace BarberApp.Application.Services
 {
-    internal class UserService
+    public class UserService : IUserService
     {
+
     }
 }
